@@ -1,6 +1,7 @@
-const knex = require("../database/knex");
-const Error = require("../utils/Error");
-const { hash, compare } = require("bcryptjs");
+import knex from "../database/knex/index.js";
+import Error from "../utils/Error.js";
+import pkg from "bcryptjs";
+const { hash, compare } = pkg
 
 class UsersController {
   async create(request, response) {
@@ -51,7 +52,7 @@ class UsersController {
         name,
         email,
         password: hashedPassword,
-        updated_at: knex.fn.now()
+        updated_at: fn.now()
       }).where({id})
 
       return response.status(201).json();
@@ -67,4 +68,4 @@ class UsersController {
   }
 }
 
-module.exports = UsersController;
+export default UsersController;

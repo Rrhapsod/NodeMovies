@@ -1,15 +1,12 @@
-require("express-async-errors");
-const express = require("express");
-const connection = require("./database/knex");
-const routes = require("./routes");
-const Error = require("./utils/Error");
+import "express-async-errors";
+import express, { json } from "express";
+import routes from "./routes/index.js";
+import Error from "./utils/Error.js";
 const port = 3333;
 
 const app = express();
-app.use(express.json());
+app.use(json());
 app.use(routes);
-
-//connection.queryBuilder();
 
 app.use((error, request, response, next) => {
   if (error instanceof Error) {

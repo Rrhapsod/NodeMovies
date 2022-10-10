@@ -1,7 +1,7 @@
-const { Router } = require("express");
-const usersRoutes = require("../routes/users.routes");
-const moviesRoutes = require("./movies.routes");
-const tagsRoutes = require("./tags.routes");
+import { Router } from "express";
+import usersRoutes from "../routes/users.routes.js";
+import moviesRoutes from "./movies.routes.js";
+import tagsRoutes from "./tags.routes.js";
 
 const routes = Router();
 
@@ -9,4 +9,4 @@ routes.use("/users", usersRoutes);
 routes.use("/movies", moviesRoutes);
 routes.use("/tags", tagsRoutes);
 
-module.exports = routes;
+export default routes;
