@@ -2,6 +2,7 @@ import "express-async-errors";
 import express, { json } from "express";
 import routes from "./routes/index.js";
 import Error from "./utils/Error.js";
+
 const port = 3333;
 
 const app = express();
