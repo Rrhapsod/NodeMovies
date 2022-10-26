@@ -2,11 +2,15 @@ import "express-async-errors";
 import express, { json } from "express";
 import routes from "./routes/index.js";
 import Error from "./utils/Error.js";
+import { UPLOADS_FOLDER } from "./configs/upload.js";
 
 const port = 3333;
 
 const app = express();
 app.use(json());
+
+app.use("/files", express.static(UPLOADS_FOLDER));
+
 app.use(routes);
 
 app.use((error, request, response, next) => {

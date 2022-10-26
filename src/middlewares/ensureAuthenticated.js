@@ -1,8 +1,8 @@
 import Error from "../utils/Error.js";
 import * as authConfig from "../configs/auth.js";
-import pacote from "jsonwebtoken";
+import pkg from "jsonwebtoken";
 
-const { verify } = pacote;
+const { verify } = pkg;
 
 export function ensureAuthenticated(request, response, next) {
   const authHeader = request.headers.authorization;
