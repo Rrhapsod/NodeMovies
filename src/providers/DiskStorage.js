@@ -1,4 +1,4 @@
-import { promises } from "fs";
+import { promises } from "node:fs";
 import { resolve } from "path";
 import { UPLOADS_FOLDER, TMP_FOLDER } from "../configs/upload.js";
 
