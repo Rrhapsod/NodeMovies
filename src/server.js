@@ -1,3 +1,5 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
 import "express-async-errors";
 import express, { json } from "express";
 import cors from "cors";
@@ -5,7 +7,7 @@ import routes from "./routes/index.js";
 import Error from "./utils/Error.js";
 import { UPLOADS_FOLDER } from "./configs/upload.js";
 
-const port = 3333;
+const port = process.env.SERVER_PORT || 3000;
 
 const app = express();
 app.use(cors());
