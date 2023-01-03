@@ -2,25 +2,19 @@ import knex from "../database/knex/index.js";
 import Error from "../utils/Error.js";
 import pkg from "bcryptjs";
 
-const { hash, compare } = pkg;
+import { UserRepository } from "../repositories/UserRepository.js";
+import { UserCreateService } from "../services/UserCreateService.js";
+
+const { compare } = pkg;
 
 class UsersController {
   async create(request, response) {
     const { name, email, password } = request.body;
 
-    const userExists = await knex("users").where({ email }).first();
+    const userRepository = new UserRepository();
+    const userCreateService = new UserCreateService(userRepository);
 
-    if (userExists) {
-      throw new Error("E-mail já cadastrado!");
-    }
-
-    const hashedPassword = await hash(password, 8);
-
-    await knex("users").insert({
-      name,
-      email,
-      password: hashedPassword,
-    });
+    await userCreateService.execute({ name, email, password });
 
     return response.status(201).json();
   }
@@ -42,6 +36,7 @@ class UsersController {
     if (password && !old_password) {
       throw new Error("Informe a senha antiga para alterá-la!");
     }
+
     if (password && old_password) {
       const checkOldPassword = await compare(old_password, user.password);
       if (!checkOldPassword) {
